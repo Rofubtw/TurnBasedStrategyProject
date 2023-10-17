@@ -10,8 +10,11 @@ public class UnitActionSystem : MonoBehaviour
 
     public event Action OnSelectedUnitChanged;
 
-    [field: SerializeField] public Unit SelectedUnit { get; private set; }
-    [SerializeField] private LayerMask unitsLayerMask;
+    [field: SerializeField] 
+    public Unit SelectedUnit { get; private set; }
+
+    [SerializeField] 
+    private LayerMask unitsLayerMask;
 
     private void Awake()
     {

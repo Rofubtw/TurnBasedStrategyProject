@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Unit : MonoBehaviour
 {
-    [SerializeField] private Animator unitAnimator;
+    [SerializeField] 
+    private Animator unitAnimator;
 
     private Vector3 targetPosition;
 
