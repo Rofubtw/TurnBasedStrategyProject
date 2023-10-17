@@ -269,8 +269,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
-  m_LocalRotation: {x: -0.2010023, y: 0.26425102, z: -0.056393016, w: -0.9415887}
-  m_LocalPosition: {x: 3.3359432, y: 3.3139944, z: -3.515688}
+  m_LocalRotation: {x: 0.32417065, y: -0.26922718, z: 0.09741924, w: 0.90163165}
+  m_LocalPosition: {x: 5.6138144, y: 5.3948507, z: -1.8593235}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -606,6 +606,52 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &643408057
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 643408058}
+  - component: {fileID: 643408059}
+  m_Layer: 0
+  m_Name: LevelGrid
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &643408058
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 643408057}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &643408059
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 643408057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee3b63782b533a14394c9121ff7767c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gridDebugObjectPrefab: {fileID: 5210798939959897220, guid: 6d42c65761968fa4fa41fbee111f75e3,
+    type: 3}
 --- !u!114 &734507675 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5650964487982611736, guid: 7a4f34c96b8521947a41c1b9caed180b,
@@ -812,8 +858,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f98dc0efebfed16419fb6371a007954d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridDebugObjectPrefab: {fileID: 5210798939959897220, guid: 6d42c65761968fa4fa41fbee111f75e3,
-    type: 3}
 --- !u!4 &1777677474
 Transform:
   m_ObjectHideFlags: 0
