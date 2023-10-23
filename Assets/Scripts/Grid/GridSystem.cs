@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class GridSystem
 {
-    private int width;
-    private int height;
+    public int Width { get; private set; }
+    public int Height { get; private set; }
+
     private float cellSize;
     private GridObject[,] gridObjectArray;
 
     public GridSystem(int width, int height, float cellSize)
     {
-        this.width = width;
-        this.height = height;
+        Width = width;
+        Height = height;
         this.cellSize = cellSize;
 
         gridObjectArray = new GridObject[width, height];
@@ -40,9 +41,9 @@ public class GridSystem
 
     public void CreateDebugObjects(Transform debugPrefabs)
     {
-        for (int x = 0; x < width; x++)
+        for (int x = 0; x < Width; x++)
         {
-            for (int z = 0; z < height; z++)
+            for (int z = 0; z < Height; z++)
             {
                 GridPosition gridPosition = new GridPosition(x, z);
 
@@ -63,7 +64,7 @@ public class GridSystem
     {
         return gridPosition.x >= 0 && 
                gridPosition.z >= 0 && 
-               gridPosition.x < width && 
-               gridPosition.z < height;
+               gridPosition.x < Width && 
+               gridPosition.z < Height;
     }
 }

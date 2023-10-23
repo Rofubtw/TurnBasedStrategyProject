@@ -5,15 +5,22 @@ using UnityEngine;
 public class Unit : MonoBehaviour
 {
     public MoveAction MoveAction { get; private set; }
+    public SpinAction SpinAction { get; private set; }
+    public BaseAction[] BaseActionArray { get; private set; }
 
     public GridPosition gridPosition { get; private set; }
 
     private void Awake()
     {
-        if(TryGetComponent<MoveAction>(out MoveAction moveAction))
+        if (TryGetComponent<MoveAction>(out MoveAction moveAction))
         {
-            this.MoveAction = moveAction;
+            MoveAction = moveAction;
         }
+        if (TryGetComponent<SpinAction>(out SpinAction spinAction))
+        {
+            SpinAction = spinAction;
+        }
+        BaseActionArray = GetComponents<BaseAction>();
     }
 
     private void Start()
