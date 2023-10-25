@@ -9,6 +9,8 @@ public abstract class BaseAction : MonoBehaviour
     protected bool isActive;
     protected Action onActionComplete;
 
+    public virtual int ActionPointsCos { get; protected set; } = 1;
+
     protected virtual void Awake()
     {
         unit = GetComponent<Unit>();
@@ -26,4 +28,10 @@ public abstract class BaseAction : MonoBehaviour
     }
 
     public abstract List<GridPosition> GetValidActionGridPositionList();
+
+    public virtual int GetActionPontsCost()
+    {
+        int cost = 1;
+        return cost;
+    }
 }
