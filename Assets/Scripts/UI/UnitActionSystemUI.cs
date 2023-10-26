@@ -60,6 +60,21 @@ public class UnitActionSystemUI : MonoBehaviour
         }
     }
 
+    private void UpdateSelectedVisual()
+    {
+        foreach (ActionButtonUI actionButtonUI in actionButtonUIList)
+        {
+            actionButtonUI.UpdateSelectedVisual();
+        }
+    }
+
+    private void UpdateActionPoints()
+    {
+        Unit selectedUnit = UnitActionSystem.instance.SelectedUnit;
+        int actionPoints = selectedUnit.ActionPoints;
+        actionPointsText.text = "Action Points : " + actionPoints;
+    }
+
     private void UnitActionSystem_OnSelectedUnitChanged()
     {
         CreateUnitActionButtons();
@@ -85,21 +100,8 @@ public class UnitActionSystemUI : MonoBehaviour
 
     private void Unit_OnAnyChangeActionPointsChanged()
     {
-        UpdateSelectedVisual();
+        UpdateActionPoints();
     }
 
-    private void UpdateSelectedVisual()
-    {
-        foreach(ActionButtonUI actionButtonUI in actionButtonUIList)
-        {
-            actionButtonUI.UpdateSelectedVisual();
-        }
-    }
-
-    private void UpdateActionPoints()
-    {
-        Unit selectedUnit = UnitActionSystem.instance.SelectedUnit;
-        int actionPoints = selectedUnit.ActionPoints;
-        actionPointsText.text = "Action Points : " + actionPoints;
-    }
+    
 }
