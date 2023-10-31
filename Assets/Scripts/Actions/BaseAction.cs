@@ -5,7 +5,11 @@ using UnityEngine;
 
 public abstract class BaseAction : MonoBehaviour
 {
-    protected Unit unit;
+    public static EventHandler OnAnyActionStarted;
+    public static EventHandler OnAnyActionCompleted;
+
+    public Unit Unit { get; private set; }
+
     protected bool isActive;
     protected Action onActionComplete;
 
@@ -13,7 +17,7 @@ public abstract class BaseAction : MonoBehaviour
 
     protected virtual void Awake()
     {
-        unit = GetComponent<Unit>();
+        Unit = GetComponent<Unit>();
     }
 
     public abstract string GetActionName();
@@ -33,5 +37,20 @@ public abstract class BaseAction : MonoBehaviour
     {
         int cost = 1;
         return cost;
+    }
+
+    protected void ActionStart(Action onActionComplete)
+    {
+        isActive = true;
+        this.onActionComplete = onActionComplete;
+
+        OnAnyActionStarted?.Invoke(this, EventArgs.Empty);
+    }
+
+    protected void ActionComplete()
+    {
+        isActive = false;
+        onActionComplete();
+        OnAnyActionCompleted?.Invoke(this, EventArgs.Empty);
     }
 }

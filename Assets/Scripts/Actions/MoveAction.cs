@@ -7,8 +7,8 @@ using UnityEngine;
 
 public class MoveAction : BaseAction
 {
-    [SerializeField]
-    private Animator unitAnimator;
+    public event Action OnStartMoving;
+    public event Action OnStopMoving;
 
     [SerializeField]
     private int maxMoveDistance;
@@ -35,13 +35,12 @@ public class MoveAction : BaseAction
         {
             float moveSpeed = 4f;
             transform.position += moveDir * moveSpeed * Time.deltaTime;
-            unitAnimator.SetBool("IsWalking", true);
         }
         else
         {
-            unitAnimator.SetBool("IsWalking", false);
-            isActive = false;
-            onActionComplete();
+            OnStopMoving?.Invoke();
+
+            ActionComplete();
         }
 
         float rotationSpeed = 10f;
@@ -49,16 +48,18 @@ public class MoveAction : BaseAction
     }
     public override void TakeAction(GridPosition gridPosition, Action onActionComplete)
     {
-        this.onActionComplete = onActionComplete;
-        isActive = true;
+        OnStartMoving?.Invoke();
+
         targetPosition = LevelGrid.instance.GetWorldPosition(gridPosition);
+
+        ActionStart(onActionComplete);
     }
 
     public override List<GridPosition> GetValidActionGridPositionList()
     {
         List<GridPosition> validGridPositionList = new List<GridPosition>();
 
-        GridPosition unitGridPosition = unit.gridPosition;
+        GridPosition unitGridPosition = Unit.GridPosition;
         for (int x = -maxMoveDistance; x <= maxMoveDistance; x++)
         {
             for (int z = -maxMoveDistance; z <= maxMoveDistance; z++)
