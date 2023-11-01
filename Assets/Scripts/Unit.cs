@@ -16,6 +16,7 @@ public class Unit : MonoBehaviour
 
     public MoveAction MoveAction { get; private set; }
     public SpinAction SpinAction { get; private set; }
+    public ShootAction ShootAction { get; private set; }
     public BaseAction[] BaseActionArray { get; private set; }
     public GridPosition GridPosition { get; private set; }
     public HealthSystem HealthSystem { get; private set; }
@@ -26,6 +27,10 @@ public class Unit : MonoBehaviour
         if (TryGetComponent<MoveAction>(out MoveAction moveAction))
         {
             MoveAction = moveAction;
+        }
+        if (TryGetComponent<ShootAction>(out ShootAction shootAction))
+        {
+            ShootAction = shootAction;
         }
         if (TryGetComponent<SpinAction>(out SpinAction spinAction))
         {
@@ -108,5 +113,10 @@ public class Unit : MonoBehaviour
     public Vector3 GetWorldPosition()
     {
         return transform.position;
+    }
+
+    public float GetHealthNormalized()
+    {
+        return HealthSystem.GetHealthNormalized();
     }
 }

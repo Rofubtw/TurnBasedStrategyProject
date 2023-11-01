@@ -91,15 +91,20 @@ public class ShootAction : BaseAction
 
     public override List<GridPosition> GetValidActionGridPositionList()
     {
+        GridPosition unitGridPosition = Unit.GridPosition;
+        return GetValidActionGridPositionList(unitGridPosition);
+    }
+
+    public List<GridPosition> GetValidActionGridPositionList(GridPosition unitGridPosition) 
+    {
         List<GridPosition> validGridPositionList = new List<GridPosition>();
 
-        GridPosition unitGridPosition = Unit.GridPosition;
         for (int x = -MaxShootDistance; x <= MaxShootDistance; x++)
         {
             for (int z = -MaxShootDistance; z <= MaxShootDistance; z++)
             {
                 GridPosition offsetGridPosition = new GridPosition(x, z);
-                GridPosition testGridPosition = offsetGridPosition + unitGridPosition;
+                GridPosition testGridPosition = unitGridPosition + offsetGridPosition;
 
                 if (!LevelGrid.instance.IsValidGridPosition(testGridPosition)) continue;
 
@@ -130,5 +135,22 @@ public class ShootAction : BaseAction
         canShootBullet = true;
 
         ActionStart(onActionComplete);
+    }
+
+    public override EnemyAIAction GetEnemyAIAction(GridPosition gridPosition)
+    {
+        Unit targetUnit = LevelGrid.instance.GetUnitAtGridPosition(gridPosition);
+        ;
+
+        return new EnemyAIAction
+        {
+            gridPosition = gridPosition,
+            actionValue = 100 + Mathf.RoundToInt((1 - targetUnit.GetHealthNormalized()) * 100f),
+        };
+    }
+
+    public int GetTargetCountAtPosition(GridPosition gridPosition)
+    {
+        return GetValidActionGridPositionList(gridPosition).Count;
     }
 }
