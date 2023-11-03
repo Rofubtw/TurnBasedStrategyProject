@@ -13,7 +13,11 @@ public class ShootAction : BaseAction
         Shooting,
         Cooloff,
     }
-    
+
+    [SerializeField]
+    private LayerMask obstaclesLayerMask;
+
+
     public Unit TargetUnit { get; private set; }
     public int MaxShootDistance { get; private set; } = 7;
 
@@ -115,6 +119,19 @@ public class ShootAction : BaseAction
 
                 Unit targetUnit = LevelGrid.instance.GetUnitAtGridPosition(testGridPosition);
                 if (targetUnit.IsEnemy == Unit.IsEnemy) continue; // both units in same team
+
+                Vector3 unitWorldPosition = LevelGrid.instance.GetWorldPosition(unitGridPosition);
+                Vector3 shootDir = (targetUnit.GetWorldPosition() - unitWorldPosition).normalized;
+                float unitShoulderHeight = 1.7f;
+                if (Physics.Raycast(unitWorldPosition + Vector3.up * unitShoulderHeight,
+                    shootDir,
+                    Vector3.Distance(unitWorldPosition, targetUnit.GetWorldPosition()),
+                    obstaclesLayerMask))
+                {
+                    // Blocked by an Obstacle'
+                    continue;
+                }
+
 
 
                 validGridPositionList.Add(testGridPosition);

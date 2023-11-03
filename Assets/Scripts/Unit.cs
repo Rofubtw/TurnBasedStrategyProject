@@ -14,9 +14,6 @@ public class Unit : MonoBehaviour
     [field: SerializeField]
     public bool IsEnemy { get; private set; }
 
-    public MoveAction MoveAction { get; private set; }
-    public SpinAction SpinAction { get; private set; }
-    public ShootAction ShootAction { get; private set; }
     public BaseAction[] BaseActionArray { get; private set; }
     public GridPosition GridPosition { get; private set; }
     public HealthSystem HealthSystem { get; private set; }
@@ -24,18 +21,7 @@ public class Unit : MonoBehaviour
 
     private void Awake()
     {
-        if (TryGetComponent<MoveAction>(out MoveAction moveAction))
-        {
-            MoveAction = moveAction;
-        }
-        if (TryGetComponent<ShootAction>(out ShootAction shootAction))
-        {
-            ShootAction = shootAction;
-        }
-        if (TryGetComponent<SpinAction>(out SpinAction spinAction))
-        {
-            SpinAction = spinAction;
-        }
+        
         if (TryGetComponent<HealthSystem>(out HealthSystem healthSystem))
         {
             HealthSystem = healthSystem;
@@ -65,6 +51,18 @@ public class Unit : MonoBehaviour
 
             LevelGrid.instance.UnitMovedGridPosition(this, oldGridPosition, newGridPosition);
         }
+    }
+
+    public T GetAction<T>() where T : BaseAction
+    {
+        foreach(BaseAction baseAction in BaseActionArray) 
+        {
+            if(baseAction is T)
+            {
+                return (T)baseAction;
+            }
+        }
+        return null;
     }
 
     public bool TrySpendActionPointsToTakeAction(BaseAction baseAction)

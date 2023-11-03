@@ -99,7 +99,7 @@ public class UnitActionSystem : MonoBehaviour
     public void SetSelectedUnit(Unit unit)
     {
         SelectedUnit = unit;
-        SetSelectedAction(unit.MoveAction);
+        SetSelectedAction(unit.GetAction<MoveAction>());
         OnSelectedUnitChanged?.Invoke();
     }
 
