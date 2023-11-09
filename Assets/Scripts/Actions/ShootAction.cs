@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class ShootAction : BaseAction
 {
+    public static event Action<Unit,Unit> OnAnyShoot;
+
     public event Action<Unit,Unit> OnShoot;
 
     private enum State
@@ -74,8 +76,9 @@ public class ShootAction : BaseAction
 
     private void Shoot()
     {
-        OnShoot?.Invoke(TargetUnit, Unit);
+        OnAnyShoot?.Invoke(TargetUnit, Unit);
 
+        OnShoot?.Invoke(TargetUnit, Unit);
 
         TargetUnit.Damage(40);
     }
